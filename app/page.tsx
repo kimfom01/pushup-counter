@@ -12,8 +12,9 @@ export default function Home() {
             name="pushupCount"
             type="number"
             placeholder="How many pushups"
+            className="text-lg"
           />
-          <Button className="w-full" type="submit">
+          <Button className="w-full text-lg" type="submit">
             Log
           </Button>
         </div>
