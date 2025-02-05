@@ -5,7 +5,7 @@ import Pushup from "@/models/pushup";
 import getCurrentUser from "./getCurrentUser";
 import { revalidatePath } from "next/cache";
 
-export async function logPushups(prevState: any, formData: FormData) {
+export async function logPushups(prevState: unknown, formData: FormData) {
   const user = await getCurrentUser();
 
   const pushupCount = Number(formData.get("pushupCount"));
