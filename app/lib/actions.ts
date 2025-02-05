@@ -5,7 +5,7 @@ import Pushup from "@/models/pushup";
 import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-export async function logPushups(formData: FormData) {
+export async function logPushups(prevState: any, formData: FormData) {
   const { userId: clerkId } = await auth();
 
   if (!clerkId) {
@@ -40,7 +40,7 @@ export async function logPushups(formData: FormData) {
       date: new Date(),
     };
     await prisma.pushup.create({ data: newPushup });
-    return;
+    return { message: "Created new entry" };
   }
 
   pushup.count += pushupCount;
@@ -51,4 +51,5 @@ export async function logPushups(formData: FormData) {
     },
     data: pushup,
   });
+  return { message: "Added the pushups" };
 }
