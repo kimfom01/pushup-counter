@@ -2,25 +2,11 @@
 
 import prisma from "@/lib/prisma";
 import Pushup from "@/models/pushup";
-import { auth } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+import getCurrentUser from "./getCurrentUser";
+import { revalidatePath } from "next/cache";
 
-export async function logPushups(prevState: any, formData: FormData) {
-  const { userId: clerkId } = await auth();
-
-  if (!clerkId) {
-    throw new NextResponse("Unauthorized", { status: 401 });
-  }
-
-  const user = await prisma.user.findUnique({
-    where: {
-      clerkId: clerkId,
-    },
-  });
-
-  if (!user) {
-    throw new NextResponse("User not exist", { status: 404 });
-  }
+export async function logPushups(prevState: unknown, formData: FormData) {
+  const user = await getCurrentUser();
 
   const pushupCount = Number(formData.get("pushupCount"));
 
@@ -40,6 +26,7 @@ export async function logPushups(prevState: any, formData: FormData) {
       date: new Date(),
     };
     await prisma.pushup.create({ data: newPushup });
+    revalidatePath("/");
     return { message: "Created new entry" };
   }
 
@@ -51,5 +38,6 @@ export async function logPushups(prevState: any, formData: FormData) {
     },
     data: pushup,
   });
+  revalidatePath("/");
   return { message: "Added the pushups" };
 }
