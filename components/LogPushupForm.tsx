@@ -19,6 +19,7 @@ const LogPushupForm = () => {
           type="number"
           placeholder="How many pushups"
           className="text-lg"
+          required
         />
         {state.message && <p aria-live="polite">{state.message}</p>}
         <Button disabled={pending} className="w-full text-lg" type="submit">
