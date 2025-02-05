@@ -1,21 +1,21 @@
-import { Suspense } from "react";
-import TotalPushups from "@/components/TotalPushups";
-import LogPushupForm from "@/components/LogPushupForm";
-import getCurrentUser from "./lib/getCurrentUser";
-import getTotalPushupCount from "./lib/getTotalPushupCount";
+import { Button } from "@/components/ui/button";
+import { SignedOut, SignedIn, SignInButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 export default async function Home() {
-  const user = await getCurrentUser();
-  const totalCount = getTotalPushupCount(user.id);
-
   return (
     <div className="grid grid-rows-[auto_1fr] justify-center items-center h-full w-full p-16">
-      <Suspense
-        fallback={<div className="italic">Calculating total pushups...</div>}
-      >
-        <TotalPushups totalCount={totalCount} />
-      </Suspense>
-      <LogPushupForm />
+      <h1 className="text-4xl text-center font-bold">Count Your Push-Ups</h1>
+      <div className="w-full place-self-center font-semibold text-xl flex flex-col items-center">
+        <SignedOut>
+          <SignInButton>Get Started</SignInButton>
+        </SignedOut>
+        <SignedIn>
+          <Link href={"/home"}>
+            <Button>Start Keeping Counts</Button>
+          </Link>
+        </SignedIn>
+      </div>
     </div>
   );
 }
