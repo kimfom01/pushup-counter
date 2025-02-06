@@ -1,12 +1,12 @@
 import prisma from "@/lib/prisma";
-import { auth } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+import { redirect } from "next/navigation";
+import ensureSignedIn from "./ensureSignedIn";
 
 const getCurrentUser = async () => {
-  const { userId: clerkId } = await auth();
+  const clerkId = await ensureSignedIn();
 
   if (!clerkId) {
-    throw new NextResponse("Unauthorized", { status: 401 });
+    throw redirect("/");
   }
 
   const user = await prisma.user.findUnique({
@@ -16,7 +16,7 @@ const getCurrentUser = async () => {
   });
 
   if (!user) {
-    throw new NextResponse("User not exist", { status: 404 });
+    throw redirect("/");
   }
 
   return user;

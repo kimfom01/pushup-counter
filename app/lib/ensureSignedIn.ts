@@ -7,6 +7,8 @@ const ensureSignedIn = async () => {
   if (!clerkId) {
     throw redirect("/");
   }
+
+  return clerkId;
 };
 
 export default ensureSignedIn;

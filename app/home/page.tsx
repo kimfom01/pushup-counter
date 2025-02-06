@@ -3,10 +3,14 @@ import TotalPushups from "@/components/TotalPushups";
 import { Suspense } from "react";
 import getCurrentUser from "../lib/getCurrentUser";
 import getTotalPushupCount from "../lib/getTotalPushupCount";
-import ensureSignedIn from "../lib/ensureSignedIn";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pushup Counter | Home",
+  description: "Count Your Push-Ups",
+};
 
 const Home = async () => {
-  await ensureSignedIn();
   const user = await getCurrentUser();
   const totalCount = getTotalPushupCount(user.id);
 
