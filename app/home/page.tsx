@@ -6,7 +6,7 @@ import getTotalPushupCount from "../lib/getTotalPushupCount";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pushup Counter | Home",
+  title: "Home | Pushup Counter",
   description: "Count Your Push-Ups",
 };
 
