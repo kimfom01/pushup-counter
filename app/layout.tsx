@@ -45,15 +45,26 @@ export default function RootLayout({
           >
             <div className="mx-auto container grid grid-rows-[auto_1fr] p-4 h-screen w-screen">
               <div className="h-fit w-full flex justify-between items-center">
-                <div className="text-3xl font-bold">
-                  <Link href={"/"}>Pushup Counter</Link>
+                <div className="text-xl md:text-3xl font-bold">
+                  <SignedIn>
+                    <Link href={"/home"}>Pushup Counter</Link>
+                  </SignedIn>
+                  <SignedOut>
+                    <Link href={"/"}>Pushup Counter</Link>
+                  </SignedOut>
                 </div>
-                <SignedOut>
-                  <SignInButton />
-                </SignedOut>
-                <SignedIn>
-                  <UserButton />
-                </SignedIn>
+                <div className="flex gap-4 font-bold items-center">
+                  <div className="hidden md:block">
+                    <Link href={"/home"}>Home</Link>
+                  </div>
+                  <Link href={"/leaderboard"}>Leaderboard</Link>
+                  <SignedOut>
+                    <SignInButton />
+                  </SignedOut>
+                  <SignedIn>
+                    <UserButton />
+                  </SignedIn>
+                </div>
               </div>
               <div className="h-full w-full">{children}</div>
             </div>

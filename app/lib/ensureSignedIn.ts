@@ -5,7 +5,7 @@ const ensureSignedIn = async () => {
   const { userId: clerkId } = await auth();
 
   if (!clerkId) {
-    throw redirect("/");
+    throw redirect("/login");
   }
 
   return clerkId;

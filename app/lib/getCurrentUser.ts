@@ -6,7 +6,7 @@ const getCurrentUser = async () => {
   const clerkId = await ensureSignedIn();
 
   if (!clerkId) {
-    throw redirect("/");
+    throw redirect("/login");
   }
 
   const user = await prisma.user.findUnique({
@@ -16,7 +16,7 @@ const getCurrentUser = async () => {
   });
 
   if (!user) {
-    throw redirect("/");
+    throw redirect("/login");
   }
 
   return user;
