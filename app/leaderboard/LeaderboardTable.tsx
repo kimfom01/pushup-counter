@@ -1,12 +1,12 @@
-import { use } from "react";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
   TableHeader,
   TableRow,
-} from "./ui/table";
+  TableHead,
+  TableBody,
+  TableCell,
+  Table,
+} from "@/components/ui/table";
+import { use } from "react";
 
 const LeaderboardTable = ({
   leaderBoardData,

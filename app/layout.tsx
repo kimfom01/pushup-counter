@@ -10,6 +10,7 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/nextjs";
+import HamburgerMenu, { MenuItem } from "@/components/HamburgerMenu";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +26,12 @@ export const metadata: Metadata = {
   title: "Pushup Counter",
   description: "Count Your Push-Ups",
 };
+
+const menuItems: MenuItem[] = [
+  { title: "Home", href: "/" },
+  { title: "Leaderboard", href: "/leaderboard" },
+  { title: "History", href: "/history" },
+];
 
 export default function RootLayout({
   children,
@@ -54,10 +61,12 @@ export default function RootLayout({
                   </SignedOut>
                 </div>
                 <div className="flex gap-4 font-bold items-center">
-                  <div className="hidden md:block">
+                  <HamburgerMenu menuItems={menuItems} />
+                  <div className="hidden md:flex gap-4 font-bold items-center">
                     <Link href={"/home"}>Home</Link>
+                    <Link href={"/leaderboard"}>Leaderboard</Link>
+                    <Link href={"/history"}>History</Link>
                   </div>
-                  <Link href={"/leaderboard"}>Leaderboard</Link>
                   <SignedOut>
                     <SignInButton />
                   </SignedOut>

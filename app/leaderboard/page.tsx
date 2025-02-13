@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import ensureSignedIn from "../lib/ensureSignedIn";
-import LeaderboardTable from "@/components/LeaderboardTable";
+import LeaderboardTable from "./LeaderboardTable";
 import getLeaderboardData from "../lib/getLeaderboard";
 
 const LeaderBoard = async () => {
