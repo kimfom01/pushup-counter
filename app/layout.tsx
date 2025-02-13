@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 const menuItems: MenuItem[] = [
-  { title: "Home", href: "/" },
+  { title: "Home", href: "/home" },
   { title: "Leaderboard", href: "/leaderboard" },
   { title: "History", href: "/history" },
 ];
