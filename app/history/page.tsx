@@ -8,7 +8,7 @@ const History = async () => {
   const historyData = getUserHistory(clerkId);
 
   return (
-    <div className="grid grid-rows-[auto_1fr] justify-center h-full w-full gap-16 p-16">
+    <div className="grid grid-rows-[auto_1fr] justify-center h-full w-full gap-16 p-8">
       <h1 className="text-3xl text-center font-bold">History</h1>
       <Suspense fallback={<div className="italic">Fetching the history</div>}>
         <HistoryTable historyData={historyData} />
