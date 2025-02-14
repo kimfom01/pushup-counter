@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -9,9 +11,9 @@ import {
 import { use } from "react";
 
 const HistoryTable = ({
-  historyData,
+  data,
 }: {
-  historyData: Promise<
+  data: Promise<
     {
       id: number;
       userId: number;
@@ -21,7 +23,7 @@ const HistoryTable = ({
     }[]
   >;
 }) => {
-  const history = use(historyData);
+  const historyData = use(data);
   return (
     <Table className="text-xl">
       <TableHeader>
@@ -32,7 +34,7 @@ const HistoryTable = ({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {history.map((item) => {
+        {historyData.map((item) => {
           return (
             <TableRow key={item.date}>
               <TableCell>{item.date}</TableCell>

@@ -4,8 +4,9 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
+const pageSize = 7;
 
-const getUserHistory = async (clerkId: string) => {
+const getUserHistory = async (clerkId: string, page?: number) => {
   const user = await prisma.user.findFirst({
     where: {
       clerkId: clerkId,
@@ -20,17 +21,35 @@ const getUserHistory = async (clerkId: string) => {
     where: {
       userId: user.id,
     },
+    orderBy: {
+      date: "desc",
+    },
+    skip: ((page ?? 1) - 1) * pageSize,
+    take: pageSize,
   });
 
-  return history.map((item) => {
-    return {
-      id: item.id,
-      userId: item.userId,
-      count: item.count,
-      when: dayjs().to(item.date),
-      date: dayjs(item.date).format("DD/MM/YYYY"),
-    };
+  const total = await prisma.pushup.count({
+    where: {
+      userId: user.id,
+    },
   });
+
+  return {
+    total,
+    page,
+    pageSize,
+    historyData: Promise.resolve(
+      history.map((item) => {
+        return {
+          id: item.id,
+          userId: item.userId,
+          count: item.count,
+          when: dayjs().to(item.date),
+          date: dayjs(item.date).format("DD/MM/YYYY"),
+        };
+      })
+    ),
+  };
 };
 
 export default getUserHistory;
