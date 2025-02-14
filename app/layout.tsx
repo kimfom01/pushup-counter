@@ -11,6 +11,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import HamburgerMenu, { MenuItem } from "@/components/HamburgerMenu";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -76,6 +77,7 @@ export default function RootLayout({
                 </div>
               </div>
               <div className="h-full w-full">{children}</div>
+              <SpeedInsights />
             </div>
           </ThemeProvider>
         </ClerkProvider>
