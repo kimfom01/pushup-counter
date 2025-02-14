@@ -2,6 +2,12 @@ import React, { Suspense } from "react";
 import ensureSignedIn from "../lib/ensureSignedIn";
 import HistoryTable from "./HistoryTable";
 import getUserHistory from "../lib/getUserHistory";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "History | Pushup Counter",
+  description: "Count Your Push-Ups",
+};
 
 const History = async () => {
   const clerkId = await ensureSignedIn();

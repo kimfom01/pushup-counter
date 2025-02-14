@@ -1,4 +1,10 @@
 import { SignIn } from "@clerk/nextjs";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Login | Pushup Counter",
+  description: "Count Your Push-Ups",
+};
 
 const Login = () => {
   return (

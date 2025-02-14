@@ -2,8 +2,14 @@ import React, { Suspense } from "react";
 import ensureSignedIn from "../lib/ensureSignedIn";
 import LeaderboardTable from "./LeaderboardTable";
 import getLeaderboardData from "../lib/getLeaderboard";
+import { Metadata } from "next";
 
-const LeaderBoard = async () => {
+export const metadata: Metadata = {
+  title: "Leaderboard | Pushup Counter",
+  description: "Count Your Push-Ups",
+};
+
+const Leaderboard = async () => {
   await ensureSignedIn();
   const leaderBoardData = getLeaderboardData();
   return (
@@ -18,4 +24,4 @@ const LeaderBoard = async () => {
   );
 };
 
-export default LeaderBoard;
+export default Leaderboard;
