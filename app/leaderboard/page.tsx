@@ -18,7 +18,7 @@ const Leaderboard = async () => {
       <Suspense
         fallback={<div className="italic">Fetching the leaderboard</div>}
       >
-        <LeaderboardTable leaderBoardData={leaderBoardData} />
+        <LeaderboardTable data={leaderBoardData} />
       </Suspense>
     </div>
   );

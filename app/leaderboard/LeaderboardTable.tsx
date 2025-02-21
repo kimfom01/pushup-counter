@@ -9,9 +9,9 @@ import {
 import { use } from "react";
 
 const LeaderboardTable = ({
-  leaderBoardData,
+  data,
 }: {
-  leaderBoardData: Promise<
+  data: Promise<
     {
       userId: number;
       name: string | undefined;
@@ -19,7 +19,7 @@ const LeaderboardTable = ({
     }[]
   >;
 }) => {
-  const leaderBoard = use(leaderBoardData);
+  const leaderBoardData = use(data);
   return (
     <Table className="text-xl">
       <TableHeader>
@@ -29,7 +29,7 @@ const LeaderboardTable = ({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {leaderBoard.map((item) => {
+        {leaderBoardData.map((item) => {
           return (
             <TableRow key={item.userId}>
               <TableCell>{item.name}</TableCell>
