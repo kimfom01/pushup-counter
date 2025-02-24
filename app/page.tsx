@@ -12,7 +12,7 @@ export default async function Home() {
         </SignedOut>
         <SignedIn>
           <Link href={"/home"}>
-            <Button>Start Keeping Counts</Button>
+            <Button className="text-xl">Start Counting</Button>
           </Link>
         </SignedIn>
       </div>
