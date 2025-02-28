@@ -7,6 +7,10 @@ dayjs.extend(relativeTime);
 const pageSize = 7;
 
 const getUserHistory = async (clerkId: string, page?: number) => {
+  const now = new Date();
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
   const user = await prisma.user.findFirst({
     where: {
       clerkId: clerkId,
@@ -20,6 +24,10 @@ const getUserHistory = async (clerkId: string, page?: number) => {
   const history = await prisma.pushup.findMany({
     where: {
       userId: user.id,
+      date: {
+        gte: startOfMonth,
+        lt: endOfMonth,
+      },
     },
     orderBy: {
       date: "desc",
@@ -31,6 +39,10 @@ const getUserHistory = async (clerkId: string, page?: number) => {
   const total = await prisma.pushup.count({
     where: {
       userId: user.id,
+      date: {
+        gte: startOfMonth,
+        lt: endOfMonth,
+      },
     },
   });
 

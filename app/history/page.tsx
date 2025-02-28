@@ -10,6 +10,8 @@ import {
 } from "@/components/ui/pagination";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import dayjs from "dayjs";
+import months from "../lib/months";
 
 export const metadata: Metadata = {
   title: "History | Pushup Counter",
@@ -29,7 +31,9 @@ const History = async (props: {
 
   return (
     <div className="grid grid-rows-[auto_1fr] justify-center h-full w-full gap-16 p-6">
-      <h1 className="text-3xl text-center font-bold">History</h1>
+      <h1 className="text-3xl text-center font-bold">
+        History ({months.get(dayjs().month() + 1)})
+      </h1>
       <Suspense fallback={<div className="italic">Fetching the history</div>}>
         <HistoryTable data={historyData.historyData} />
       </Suspense>

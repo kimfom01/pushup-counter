@@ -1,6 +1,10 @@
 import prisma from "@/lib/prisma";
 
 const getLeaderboardData = async () => {
+  const now = new Date();
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+
   const leaderBoard = await prisma.pushup
     .groupBy({
       by: ["userId"],
@@ -10,6 +14,12 @@ const getLeaderboardData = async () => {
       orderBy: {
         _sum: {
           count: "desc",
+        },
+      },
+      where: {
+        date: {
+          gte: startOfMonth,
+          lt: endOfMonth,
         },
       },
     })
