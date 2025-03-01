@@ -1,7 +1,6 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import Pushup from "@/models/pushup";
 import getCurrentUser from "./getCurrentUser";
 import { revalidatePath } from "next/cache";
 
@@ -20,12 +19,13 @@ export async function logPushups(prevState: unknown, formData: FormData) {
   });
 
   if (!pushup) {
-    const newPushup: Pushup = {
-      userId: user.id,
-      count: pushupCount,
-      date: new Date(),
-    };
-    await prisma.pushup.create({ data: newPushup });
+    await prisma.pushup.create({
+      data: {
+        userId: user.id,
+        count: pushupCount,
+        date: new Date(),
+      },
+    });
     revalidatePath("/");
     return { message: "Created new entry" };
   }
