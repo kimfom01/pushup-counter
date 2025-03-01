@@ -26,7 +26,7 @@ const getLeaderboardData = async () => {
     .then((entry) =>
       entry.map((count) => ({
         userId: count.userId,
-        totalPushups: count._sum.count,
+        totalPushups: count._sum.count ?? 0,
       }))
     );
 
