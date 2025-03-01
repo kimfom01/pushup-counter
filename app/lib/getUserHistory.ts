@@ -12,6 +12,7 @@ const getUserHistory = async (clerkId: string, page?: number) => {
   const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
   const user = await prisma.user.findFirst({
+    select: { id: true },
     where: {
       clerkId: clerkId,
     },

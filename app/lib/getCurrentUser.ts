@@ -10,6 +10,9 @@ const getCurrentUser = async () => {
   }
 
   const user = await prisma.user.findUnique({
+    select: {
+      id: true,
+    },
     where: {
       clerkId: clerkId,
     },

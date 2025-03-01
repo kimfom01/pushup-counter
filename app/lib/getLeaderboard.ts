@@ -5,7 +5,7 @@ const getLeaderboardData = async () => {
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
   const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
-  const leaderBoard = await prisma.pushup
+  const scores = await prisma.pushup
     .groupBy({
       by: ["userId"],
       _sum: {
@@ -31,20 +31,24 @@ const getLeaderboardData = async () => {
     );
 
   const users = await prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
+    },
     where: {
       id: {
-        in: leaderBoard.map((x) => x.userId),
+        in: scores.map((x) => x.userId),
       },
     },
   });
 
-  const merged = leaderBoard.map((board) => {
-    const user = users.find((y) => y.id === board.userId);
+  const merged = scores.map((item) => {
+    const user = users.find((y) => y.id === item.userId);
 
     return {
-      userId: board.userId,
+      userId: item.userId,
       name: user?.name ?? "Unkown",
-      totalPushups: board.totalPushups,
+      totalPushups: item.totalPushups,
     };
   });
 
