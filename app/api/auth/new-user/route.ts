@@ -13,25 +13,27 @@ export async function GET() {
     return new NextResponse("User not exist", { status: 404 });
   }
 
-  let dbUser = await prisma.user.findUnique({
-    where: { clerkId: user.id },
+  const dbUser = await prisma.user.findUnique({
+    where: { email: user.emailAddresses[0].emailAddress },
   });
 
   if (!dbUser) {
-    dbUser = await prisma.user.create({
+    await prisma.user.create({
       data: {
         clerkId: user.id,
         email: user.emailAddresses[0].emailAddress,
         name: user.fullName ?? "",
       },
     });
-  }
-
-  if (!dbUser) {
-    return new NextResponse(null, {
-      status: 302,
-      headers: {
-        Location: "/",
+  } else {
+    await prisma.user.update({
+      data: {
+        clerkId: user.id,
+        email: user.emailAddresses[0].emailAddress,
+        name: user.fullName ?? "",
+      },
+      where: {
+        email: user.emailAddresses[0].emailAddress,
       },
     });
   }

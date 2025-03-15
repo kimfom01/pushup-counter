@@ -4,7 +4,6 @@ import dayjs from "dayjs";
 import { use } from "react";
 import months from "../lib/months";
 
-
 const TotalPushups = ({
   totalCount,
 }: {
@@ -17,7 +16,7 @@ const TotalPushups = ({
       <h1 className="text-xl font-bold">
         Total Pushups ({months.get(dayjs().month() + 1)})
       </h1>
-      <div className="text-5xl font-bold">{count}</div>
+      <div className="text-5xl font-bold">{count ?? 0}</div>
     </div>
   );
 };
