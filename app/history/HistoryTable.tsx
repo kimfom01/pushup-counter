@@ -16,7 +16,6 @@ const HistoryTable = ({
       id: number;
       userId: number;
       count: number;
-      when: string;
       date: string;
     }[]
   >;
@@ -27,7 +26,6 @@ const HistoryTable = ({
       <TableHeader>
         <TableRow>
           <TableHead>Date</TableHead>
-          <TableHead>When</TableHead>
           <TableHead className="text-right">Count</TableHead>
         </TableRow>
       </TableHeader>
@@ -36,7 +34,6 @@ const HistoryTable = ({
           return (
             <TableRow key={item.date}>
               <TableCell>{item.date}</TableCell>
-              <TableCell>{item.when}</TableCell>
               <TableCell className="text-right">{item.count}</TableCell>
             </TableRow>
           );
