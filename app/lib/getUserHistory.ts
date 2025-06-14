@@ -57,8 +57,7 @@ const getUserHistory = async (clerkId: string, page?: number) => {
           id: item.id,
           userId: item.userId,
           count: item.count,
-          when: dayjs().to(item.date),
-          date: dayjs(item.date).format("DD/MM/YYYY"),
+          date: item.date!.toLocaleString(),
         };
       })
     ),
