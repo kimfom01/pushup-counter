@@ -22,9 +22,9 @@ model User {
 }
 
 model Pushup {
-  id     Int       @id @default(autoincrement())
+  id     Int      @id @default(autoincrement())
   userId Int
-  user   User      @relation(fields: [userId], references: [id])
+  user   User     @relation(fields: [userId], references: [id])
   count  Int
-  date   DateTime? @default(now())
+  date   DateTime @default(now())
 }
