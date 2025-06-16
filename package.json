@@ -44,10 +44,13 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
+      "@clerk/shared",
       "@prisma/client",
       "@prisma/engines",
       "@vercel/speed-insights",
-      "prisma"
+      "esbuild",
+      "prisma",
+      "sharp"
     ]
   }
 }
