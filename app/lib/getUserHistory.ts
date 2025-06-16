@@ -1,9 +1,6 @@
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 
-dayjs.extend(relativeTime);
 const pageSize = 7;
 
 const getUserHistory = async (clerkId: string, page?: number) => {
