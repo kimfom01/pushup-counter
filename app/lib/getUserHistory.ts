@@ -1,12 +1,12 @@
 import prisma from "@/lib/prisma";
+import dayjs from "dayjs";
 import { redirect } from "next/navigation";
 
 const pageSize = 7;
 
 const getUserHistory = async (clerkId: string, page?: number) => {
-  const now = new Date();
-  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-  const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+  const startOfMonth = dayjs().startOf("month").toDate();
+  const endOfMonth = dayjs().add(1, "month").startOf("month").toDate();
 
   const user = await prisma.user.findFirst({
     select: { id: true },

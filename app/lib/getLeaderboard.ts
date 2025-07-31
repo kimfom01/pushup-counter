@@ -1,9 +1,9 @@
 import prisma from "@/lib/prisma";
+import dayjs from "dayjs";
 
 const getLeaderboardData = async () => {
-  const now = new Date();
-  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-  const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+  const startOfMonth = dayjs().startOf("month").toDate();
+  const endOfMonth = dayjs().add(1, "month").startOf("month").toDate();
 
   const scores = await prisma.pushup
     .groupBy({
