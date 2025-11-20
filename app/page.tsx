@@ -8,7 +8,9 @@ export default async function Home() {
       <h1 className="text-4xl text-center font-bold">Count Your Push-Ups</h1>
       <div className="w-full place-self-center font-semibold text-xl flex flex-col items-center">
         <SignedOut>
-          <SignInButton>Get Started</SignInButton>
+          <SignInButton>
+            <Button className="text-xl">Get Started</Button>
+          </SignInButton>
         </SignedOut>
         <SignedIn>
           <Link href={"/home"}>
