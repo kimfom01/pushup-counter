@@ -1,10 +1,10 @@
 import React, { Suspense } from "react";
-import ensureSignedIn from "../lib/ensureSignedIn";
+import ensureSignedIn from "../../lib/ensureSignedIn";
 import LeaderboardTable from "./LeaderboardTable";
-import getLeaderboardData from "../lib/getLeaderboard";
+import getLeaderboardData from "../../lib/getLeaderboard";
 import { Metadata } from "next";
 import dayjs from "dayjs";
-import months from "../lib/months";
+import months from "../../lib/months";
 
 export const metadata: Metadata = {
   title: "Leaderboard | Pushup Counter",
