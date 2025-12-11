@@ -3,16 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import Link from "next/link";
-import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/nextjs";
-import HamburgerMenu, { MenuItem } from "@/components/HamburgerMenu";
+import { ClerkProvider, SignedOut, SignInButton } from "@clerk/nextjs";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import { Button } from "@/components/ui/button";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,11 +23,7 @@ export const metadata: Metadata = {
   description: "Count Your Push-Ups",
 };
 
-const menuItems: MenuItem[] = [
-  { title: "Home", href: "/home" },
-  { title: "Leaderboard", href: "/leaderboard" },
-  { title: "History", href: "/history" },
-];
+const menuItems = [{ title: "Dashboard", href: "/dashboard" }];
 
 export default function RootLayout({
   children,
@@ -54,27 +44,23 @@ export default function RootLayout({
           >
             <div className="mx-auto container grid grid-rows-[auto_1fr] p-4 h-screen w-screen">
               <div className="h-fit w-full flex justify-between items-center">
-                <div className="text-xl md:text-3xl font-bold">
-                  <SignedIn>
-                    <Link href={"/home"}>Pushup Counter</Link>
-                  </SignedIn>
-                  <SignedOut>
+                <SignedOut>
+                  <div className="text-xl md:text-3xl font-bold">
                     <Link href={"/"}>Pushup Counter</Link>
-                  </SignedOut>
-                </div>
-                <div className="flex gap-4 font-bold items-center">
-                  <HamburgerMenu menuItems={menuItems} />
-                  <div className="hidden md:flex gap-4 font-bold items-center">
-                    <Link href={"/home"}>Home</Link>
-                    <Link href={"/leaderboard"}>Leaderboard</Link>
-                    <Link href={"/history"}>History</Link>
                   </div>
+                </SignedOut>
+                <div className="flex gap-4 font-bold items-center">
                   <SignedOut>
-                    <SignInButton />
+                    <div className="hidden md:flex gap-4 font-bold items-center">
+                      {menuItems.map((item) => (
+                        <Link key={item.title} href={item.href}>
+                          <Button className="font-bold uppercase">
+                            {item.title}
+                          </Button>
+                        </Link>
+                      ))}
+                    </div>
                   </SignedOut>
-                  <SignedIn>
-                    <UserButton />
-                  </SignedIn>
                 </div>
               </div>
               <div className="h-full w-full">{children}</div>

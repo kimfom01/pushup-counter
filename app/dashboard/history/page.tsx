@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
-import ensureSignedIn from "../lib/ensureSignedIn";
+import ensureSignedIn from "../../lib/ensureSignedIn";
 import HistoryTable from "./HistoryTable";
-import getUserHistory from "../lib/getUserHistory";
+import getUserHistory from "../../lib/getUserHistory";
 import { Metadata } from "next";
 import {
   Pagination,
@@ -11,7 +11,7 @@ import {
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import dayjs from "dayjs";
-import months from "../lib/months";
+import months from "../../lib/months";
 
 export const metadata: Metadata = {
   title: "History | Pushup Counter",

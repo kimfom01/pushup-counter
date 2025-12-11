@@ -2,7 +2,7 @@
 
 import dayjs from "dayjs";
 import { use } from "react";
-import months from "../lib/months";
+import months from "../../lib/months";
 
 const TotalPushups = ({
   totalCount,

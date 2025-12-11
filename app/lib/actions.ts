@@ -26,7 +26,7 @@ export async function logPushups(prevState: unknown, formData: FormData) {
         date: new Date(),
       },
     });
-    revalidatePath("/");
+    revalidatePath("/dashboard/counter");
     return { message: "Created new entry" };
   }
 
@@ -38,6 +38,6 @@ export async function logPushups(prevState: unknown, formData: FormData) {
     },
     data: pushup,
   });
-  revalidatePath("/");
+  revalidatePath("/dashboard/counter");
   return { message: "Added the pushups" };
 }
